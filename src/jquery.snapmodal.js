@@ -210,7 +210,8 @@
                 .css({
                     position: 'relative',
                     left: '100%',
-                    margin: '0 auto',
+                    marginLeft: 'auto',
+                    marginRight: 'auto',
                     outline: 'none',
                 })
                 .hide()
