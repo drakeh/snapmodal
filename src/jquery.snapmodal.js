@@ -16,7 +16,10 @@
         defaults: {
             overlayClass: 'snapmodal-overlay',
             containerClass: 'snapmodal-container',
+            headerClass: 'snapmodal-header',
             closeClass: 'snapmodal-close',
+            closeHtml: '<a href="#">Close</a>',
+            headerContent: null,
             escClose: true,
             overlayClose: false,
 
@@ -32,6 +35,7 @@
         $overlay: null,
         $wrap: null,
         $container: null,
+        $header: null,
         $body: null,
         $content: null,
 
@@ -139,9 +143,9 @@
             // window resize event
             W.on('resize.snapmodal orientationchange.snapmodal', function () {
                 // set a max height on the modal body, taking into account the extra vertical
-                // space occupied by the modal container's padding, border, and margin, to
-                // keep the modal within the vertical bounds of the window
-                var modalFrameHeight = SM.$container.outerHeight(true) - SM.$container.height();
+                // space occupied by the modal container's padding, border, margin, and the
+                // modal's header to keep the modal within the vertical bounds of the window
+                var modalFrameHeight = SM.$container.outerHeight(true) - SM.$container.height() + SM.$header.outerHeight(true);
                 SM.$body.css({
                     maxHeight: W.height() - modalFrameHeight
                 });
@@ -211,6 +215,21 @@
                 })
                 .hide()
                 .appendTo($wrapInner);
+
+            // create the modal header
+            SM.$header = $('<div></div>')
+                .addClass(SM.options.headerClass)
+                .css({overflow: 'hidden'})
+                .html(SM.options.headerContent)
+                .appendTo(SM.$container);
+
+            // create the close element, if HTML was provided for it
+            // and prepend it to the modal header
+            if (SM.options.closeHtml) {
+                $(SM.options.closeHtml)
+                    .addClass(SM.options.closeClass)
+                    .prependTo(SM.$header);
+            }
 
             // create the modal body
             SM.$body = $('<div></div>')
