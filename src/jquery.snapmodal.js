@@ -36,6 +36,7 @@
         $container: null,
         $header: null,
         $headerContent: null,
+        $closeElem: null,
         $body: null,
         $content: null,
 
@@ -236,9 +237,7 @@
             // create the close element, if HTML was provided for it
             // and prepend it to the modal header
             if (SM.options.closeHtml) {
-                $(SM.options.closeHtml)
-                    .addClass(SM.options.closeClass)
-                    .prependTo(SM.$header);
+                SM.$closeElem = $(SM.options.closeHtml).addClass(SM.options.closeClass).prependTo(SM.$header);
             }
 
             // create the modal body
@@ -261,8 +260,18 @@
 
             if (!oldOpt) return;
 
+            // if the closeClass option has changed, we need to update those bindings
             if (oldOpt.closeClose !== newOpt.closeClass) {
+
+                // remove binding for the old class
                 D.off('click.snapmodal');
+
+                // change the class on the provided close element, if it exists
+                if (SM.$closeElem !== null) {
+                    SM.$closeElem.removeClass(oldOpt.closeClass).addClass(newOpt.closeClass);
+                }
+
+                // redo the bindings using the new close class
                 SM._bindCloseClass();
             }
         }
