@@ -228,7 +228,12 @@
             // create the modal header and header content container
             SM.$header = $('<div></div>')
                 .addClass(SM.options.headerClass)
-                .css({overflow: 'hidden'})
+                .css({
+                    overflow: 'hidden',
+                    // set an explicit z-index to give header a
+                    // higher stacking order than the modal body
+                    zIndex: 1,
+                })
                 .appendTo(SM.$container);
 
             SM.$headerContent = $('<div></div>').appendTo(SM.$header);
@@ -236,7 +241,14 @@
             // create the close element, if HTML was provided for it
             // and prepend it to the modal header
             if (SM.options.closeHtml) {
-                SM.$closeElem = $(SM.options.closeHtml).addClass(SM.options.closeClass).prependTo(SM.$header);
+                SM.$closeElem = $(SM.options.closeHtml)
+                    .addClass(SM.options.closeClass)
+                    .css({
+                        // give the close elem a high z-index to stack
+                        // it above other elements in the header
+                        zIndex: 100,
+                    })
+                    .prependTo(SM.$header);
             }
 
             // create the modal body
