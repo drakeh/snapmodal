@@ -90,14 +90,19 @@
             SM.$container.attr('class', SM.options.containerClass);
             SM.$header.attr('class', SM.options.headerClass);
 
+            // set the initial max height for the modal body
+            SM._setModalBodyMaxHeight();
+
             // run onReady callback if one was supplied
             if ($.isFunction(SM.options.onReady)) {
                 SM.options.onReady.apply(SM, [SM.$container, SM.$overlay]);
             }
 
-            // show the overlay and container
-            SM.$overlay.fadeIn(200);
-            SM.$container.fadeIn(200);
+            // show the overlay and container, if they aren't already open
+            if (!SM.isOpen) {
+                SM.$overlay.fadeIn(200);
+                SM.$container.css({display: 'none', visibility: 'visible'}).fadeIn(200);
+            }
 
             SM.isOpen = true;
 
@@ -140,15 +145,7 @@
             });
 
             // window resize event
-            W.on('resize.snapmodal orientationchange.snapmodal', function () {
-                // set a max height on the modal body, taking into account the extra vertical
-                // space occupied by the modal container's padding, border, margin, and the
-                // modal's header to keep the modal within the vertical bounds of the window
-                var modalFrameHeight = SM.$container.outerHeight(true) - SM.$container.height() + SM.$header.outerHeight(true);
-                SM.$body.css({
-                    maxHeight: W.height() - modalFrameHeight
-                });
-            });
+            W.on('resize.snapmodal orientationchange.snapmodal', SM._setModalBodyMaxHeight);
         },
 
         _bindCloseClass: function () {
@@ -156,6 +153,17 @@
             D.on('click.snapmodal', '.' + SM.options.closeClass, function (e) {
                 e.preventDefault();
                 SM.close();
+            });
+        },
+
+        _setModalBodyMaxHeight: function () {
+            // set a max height on the modal body, taking into account the extra vertical
+            // space occupied by the modal container's padding, border, margin, and the
+            // modal's header to keep the modal within the vertical bounds of the window
+            var modalFrameHeight = SM.$container.outerHeight(true) - SM.$container.height() + SM.$header.outerHeight(true);
+            console.log(modalFrameHeight);
+            SM.$body.css({
+                maxHeight: W.height() - modalFrameHeight
             });
         },
 
@@ -210,8 +218,11 @@
                     marginLeft: 'auto',
                     marginRight: 'auto',
                     outline: 'none',
+                    // using visibility:hidden instead of display:none so that
+                    // we can run accurate calculations on the modal dimensions
+                    // before it is shown
+                    visibility: 'hidden'
                 })
-                .hide()
                 .appendTo($wrapInner);
 
             // create the modal header and header content container
