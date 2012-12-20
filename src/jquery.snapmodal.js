@@ -162,7 +162,6 @@
             // space occupied by the modal container's padding, border, margin, and the
             // modal's header to keep the modal within the vertical bounds of the window
             var modalFrameHeight = SM.$container.outerHeight(true) - SM.$container.height() + SM.$header.outerHeight(true);
-            console.log(modalFrameHeight);
             SM.$body.css({
                 maxHeight: W.height() - modalFrameHeight
             });
