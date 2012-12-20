@@ -36,6 +36,7 @@
         $wrap: null,
         $container: null,
         $header: null,
+        $headerContent: null,
         $body: null,
         $content: null,
 
@@ -69,20 +70,26 @@
             SM._setOptions(options);
 
             // create the base modal elements and bind the events, unless this
-            // has already been done, in which case, just clear the body
+            // has already been done, in which case, just clear the body and
+            // header
             if (SM.isCreated) {
+                SM.$headerContent.empty();
                 SM.$body.empty();
             } else {
                 SM._create();
                 SM.bindEvents();
             }
 
+            // add the header content
+            SM.$headerContent.html(SM.options.headerContent);
+
             // append the content to the modal body
             SM.$content.appendTo(SM.$body).show();
 
-            // set classes on the overlay and container
+            // set classes on the overlay, container, and header
             SM.$overlay.attr('class', SM.options.overlayClass);
             SM.$container.attr('class', SM.options.containerClass);
+            SM.$header.attr('class', SM.options.headerClass);
 
             // run onReady callback if one was supplied
             if ($.isFunction(SM.options.onReady)) {
@@ -217,12 +224,13 @@
                 .hide()
                 .appendTo($wrapInner);
 
-            // create the modal header
+            // create the modal header and header content container
             SM.$header = $('<div></div>')
                 .addClass(SM.options.headerClass)
                 .css({overflow: 'hidden'})
-                .html(SM.options.headerContent)
                 .appendTo(SM.$container);
+
+            SM.$headerContent = $('<div></div>').appendTo(SM.$header);
 
             // create the close element, if HTML was provided for it
             // and prepend it to the modal header
