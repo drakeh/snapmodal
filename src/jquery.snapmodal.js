@@ -28,7 +28,6 @@
         },
 
         // Current state
-        isCreated: false,
         isOpen: false,
 
         // Elements
@@ -72,7 +71,7 @@
             // create the base modal elements and bind the events, unless this
             // has already been done, in which case, just clear the body and
             // header
-            if (SM.isCreated) {
+            if (SM.isOpen) {
                 SM.$headerContent.empty();
                 SM.$body.empty();
             } else {
@@ -109,22 +108,15 @@
             if (!SM.isOpen) return;
 
             SM.isOpen = false;
-            SM.isCreated = false;
 
             SM.unbindEvents();
 
             SM.$container.fadeOut(200, function () {
                 SM.$wrap.remove();
-                SM.$wrap = null;
             });
             SM.$overlay.fadeOut(200, function () {
                 SM.$overlay.remove();
-                SM.$overlay = null;
             });
-            
-            SM.$container = null;
-            SM.$body = null;
-            SM.$content = null;
         },
 
         bindEvents: function () {
@@ -175,8 +167,6 @@
 
         _create: function () {
             var $wrapInner = null;
-
-            if(SM.isCreated) return;
 
             // create the overlay and add it to the DOM
             SM.$overlay = $('<div></div>')
@@ -252,8 +242,6 @@
 
             // add the modal wrap to the DOM
             SM.$wrap.appendTo('body');
-
-            SM.isCreated = true;
         },
 
         _setOptions: function (options) {
