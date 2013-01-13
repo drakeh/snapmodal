@@ -54,41 +54,41 @@ You can pass an options object to the `.snapmodal()` function with any of the fo
 
 ### Options
 
-**overlayClass** (String)
-The CSS class assigned to the page overlay.
+**overlayClass** (String)<br />
+The CSS class assigned to the page overlay.<br />
 default: `'snapmodal-overlay'`
 
-**containerClass** (String)
-The CSS class assigned to the main modal container.
+**containerClass** (String)<br />
+The CSS class assigned to the main modal container.<br />
 default: `'snapmodal-container'`
 
-**headerClass** (String)
-The CSS class assigned to the modal header.
+**headerClass** (String)<br />
+The CSS class assigned to the modal header.<br />
 default: `'snapmodal-header'`
 
-**closeClass** (String)
-The CSS class used to bind close elements. Any elements in the document with this class, at the time the modal opens, will have their click events bound to close the modal.
+**closeClass** (String)<br />
+The CSS class used to bind close elements. Any elements in the document with this class, at the time the modal opens, will have their click events bound to close the modal.<br />
 default: `'snapmodal-close'`
 
-**closeHtml** (String)
-The HTML template for your modal's close element. It will automatically be inserted into the modal's header, assigned the closeClass described above, and wired up to close the modal on click. If you don't want a close element, set this to null.
+**closeHtml** (String)<br />
+The HTML template for your modal's close element. It will automatically be inserted into the modal's header, assigned the closeClass described above, and wired up to close the modal on click. If you don't want a close element, set this to null.<br />
 default: `'<a href="#">Close</a>'`
 
-**headerContent** (String)
-Optional content to be inserted into the modal's header, such as a title.
+**headerContent** (String)<br />
+Optional content to be inserted into the modal's header, such as a title.<br />
 default: `null`
 
-**overlayClose** (Boolean)
-If set to true, clicking the page overlay will close the modal.
+**overlayClose** (Boolean)<br />
+If set to true, clicking the page overlay will close the modal.<br />
 default: `false`
 
-**escClose** (Boolean)
-If set to true, pressing the esc key will close the modal.
+**escClose** (Boolean)<br />
+If set to true, pressing the esc key will close the modal.<br />
 default: `false`
 
 ### Callbacks
 
-**onReady** _Function([jQuery](http://api.jquery.com/jQuery/) container, [jQuery](http://api.jquery.com/jQuery/) overlay)_
+**onReady**<br />_Function([jQuery](http://api.jquery.com/jQuery/) container, [jQuery](http://api.jquery.com/jQuery/) overlay)_<br />
 This function is called once the modal has been constructed and added to the page, but before it opens (becomes visible). This is good place to run any initialization tasks that might be required of the content inside the modal, such as binding events, initializing other plugins, or firing ajax requests for lazy-loaded modal content. This callback is passed two arguments: jQuery objects wrapping the modal container element and page overlay element, respectively. Additionally, `this` is bound to the SnapModal object.
 
 ## Feedback & Support
