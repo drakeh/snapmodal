@@ -48,16 +48,11 @@
         },
 
         open: function (data, options) {
+            // exit early if we didn't get a jQuery object
+            if (!(data instanceof $)) return;
 
-            // handle the supplied data based on its type
-            if (typeof data === 'object') {
-                data = data instanceof $ ? data : $(data); // convert DOM object to jQuery object
-                data = data.clone(); // clone so we don't modifiy the original
-            } else if (typeof data === 'string') {
-                data = $('<div></div>').html(data);
-            } else {
-                throw new Error('SnapModal error: unsupported data type');
-            }
+            // clone so we don't modifiy the original
+            data = data.clone();
 
             // break early if there's no element to work with
             if (data.length === 0) return SM;
