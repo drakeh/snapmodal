@@ -39,7 +39,7 @@ At minimum, you will probably want to give the modal container a sensible width,
 }
 ```
 
-You will probably also want to style the page overlay (unless you don't want or need an overlay), at it is unstyled by default. A nice basic overlay style is a black background with 50% transparency.
+You will probably also want to style the page overlay (unless you don't want or need an overlay), as it is unstyled by default. A nice basic overlay style is a black background with 50% transparency.
 
 ```css
 .snapmodal-overlay {
