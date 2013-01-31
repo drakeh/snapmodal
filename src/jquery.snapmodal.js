@@ -2,7 +2,7 @@
 // Copyright Drake Hampton - drakehamp@gmail.com
 // License: MIT (http://www.opensource.org/licenses/mit-license.php)
 
-;(function ($, window, document, undefined) {
+;(function ($, window, document) {
     "use strict";
 
     var W = $(window),
