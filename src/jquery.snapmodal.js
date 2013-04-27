@@ -2,7 +2,15 @@
 // Copyright Drake Hampton - drakehamp@gmail.com
 // License: MIT (http://www.opensource.org/licenses/mit-license.php)
 
-;(function ($, window, document) {
+;(function (factory) {
+    if (typeof define === 'function' && define.amd) {
+        // AMD. Register as an anonymous module.
+        define(['jquery'], factory);
+    } else {
+        // Browser globals
+        factory(jQuery);
+    }
+}(function ($) {
     "use strict";
 
     var W = $(window),
@@ -276,4 +284,4 @@
         return SM.open(this, options);
     }
 
-})(jQuery, window, document);
+}));
