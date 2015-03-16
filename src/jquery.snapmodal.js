@@ -32,6 +32,7 @@
             headerContent: null,
             escClose: true,
             overlayClose: false,
+            clone: true,
 
             // Callbacks
             onReady: $.noop
@@ -39,8 +40,10 @@
 
         // Current state
         isOpen: false,
+        display: null,
 
         // Elements
+        $placeholder: null,
         $overlay: null,
         $wrap: null,
         $container: null,
@@ -58,21 +61,29 @@
         },
 
         open: function (data, options) {
-            // exit early if we didn't get a jQuery object
-            if (!(data instanceof $)) return;
+            // convert DOM object to a jQuery object
+			data = data instanceof $ ? data : $(data);
 
-            // clone so we don't modifiy the original
-            data = data.clone();
-
-            // break early if there's no element to work with
+			// break early if there's no element to work with
             if (data.length === 0) return SM;
-
-            // set the modal content to the first element of the jQuery object
-            // and clone it so we don't modifiy the original
-            SM.$content = data.first();
 
             // set or update the user defined options
             SM._setOptions(options);
+
+            // if the element came from the DOM, either clone it or copy it and 
+            // leave a placeholder in its place (according to the `clone` option)
+            SM.$placeholder = null;
+			if (data.parent().size() > 0) {
+				if (SM.options.clone) {
+					data = data.clone(true);
+				} else {
+					SM.$placeholder = $('<div></div>').hide();
+					data.before(SM.$placeholder);
+					SM.display = data.css('display');
+				}
+			}
+
+            SM.$content = data;
 
             // create the base modal elements and bind the events, unless this
             // has already been done, in which case, just clear the body and
@@ -123,6 +134,9 @@
             SM.unbindEvents();
 
             SM.$container.fadeOut(200, function () {
+            	if (SM.$placeholder) {
+            		SM.$placeholder.replaceWith(SM.$content).css('display', SM.display);
+            	}
                 SM.$wrap.remove();
             });
             SM.$overlay.fadeOut(200, function () {

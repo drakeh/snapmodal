@@ -94,6 +94,10 @@ default: `false`
 If set to true, pressing the esc key will close the modal.<br />
 default: `false`
 
+**clone** (Boolean)<br />
+Indicates wheather the modal content should be cloned from the original. This is the default behavior. If this optin is set to `false`, the source element will be moved into the modal and then copied back to its original location in the DOM when the modal is closed. This can be useful if you want to persist any DOM changes made within the modal content or your don't want two copies of the same elements in the DOM.<br />
+default: `true`
+
 ### Callbacks
 
 **onReady**<br />_Function([jQuery](http://api.jquery.com/jQuery/) container, [jQuery](http://api.jquery.com/jQuery/) overlay)_<br />
