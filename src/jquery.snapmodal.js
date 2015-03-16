@@ -25,6 +25,7 @@
             overlayClass: 'snapmodal-overlay',
             containerClass: 'snapmodal-container',
             headerClass: 'snapmodal-header',
+            bodyClass: 'snapmodal-body',
             closeClass: 'snapmodal-close',
             closeHtml: '<a href="#">Close</a>',
             headerContent: null,
@@ -52,7 +53,7 @@
         // --------------
 
         setDefaults: function (options) {
-            SM.defaults = $.extend({}, SM.defaults, options)
+            SM.defaults = $.extend({}, SM.defaults, options);
         },
 
         open: function (data, options) {
@@ -244,6 +245,7 @@
 
             // create the modal body
             SM.$body = $('<div></div>')
+            	.addClass(SM.options.bodyClass)
                 .css({
                     overflow: 'auto'
                 })
@@ -282,6 +284,6 @@
 
     $.fn.snapmodal = function (options) {
         return SM.open(this, options);
-    }
+    };
 
 }));

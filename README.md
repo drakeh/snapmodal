@@ -66,6 +66,10 @@ default: `'snapmodal-container'`
 The CSS class assigned to the modal header.<br />
 default: `'snapmodal-header'`
 
+**bodyClass** (String)<br />
+The CSS class assigned to the modal body.<br />
+default: `'snapmodal-body'`
+
 **closeClass** (String)<br />
 The CSS class used to bind close elements. Any elements in the document with this class, at the time the modal opens, will have their click events bound to close the modal.<br />
 default: `'snapmodal-close'`
