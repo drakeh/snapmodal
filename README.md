@@ -54,6 +54,10 @@ You can pass an options object to the `.snapmodal()` function with any of the fo
 
 ### Options
 
+**appendTo** (String)<br />
+The selector for the element to which to append the modal elements. Useful for ASP.NET where you probably want to use `form:first` here.<br />
+default: `'body'`
+
 **overlayClass** (String)<br />
 The CSS class assigned to the page overlay.<br />
 default: `'snapmodal-overlay'`

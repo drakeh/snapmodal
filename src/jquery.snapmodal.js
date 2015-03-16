@@ -22,6 +22,7 @@
     $.extend(SM, {
 
         defaults: {
+        	appendTo: 'body',
             overlayClass: 'snapmodal-overlay',
             containerClass: 'snapmodal-container',
             headerClass: 'snapmodal-header',
@@ -191,7 +192,7 @@
                     zIndex: 1000
                 })
                 .hide()
-                .appendTo('body');
+                .appendTo(SM.options.appendTo);
 
             // create the outer wrapper
             SM.$wrap = $('<div></div>')
@@ -255,7 +256,7 @@
             $('html, body').css({ height: '100%' });
 
             // add the modal wrap to the DOM
-            SM.$wrap.appendTo('body');
+            SM.$wrap.appendTo(SM.options.appendTo);
         },
 
         _setOptions: function (options) {
